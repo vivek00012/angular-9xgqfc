@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { debounceTime } from 'rxjs/operators';
 
 interface Idice {
   isRolled: boolean;
@@ -45,18 +44,17 @@ export class AppComponent {
 
   playAgain(): void {
     this.hidden = !this.hidden;
-    this.rolling=false;
+    this.rolling = false;
     this.rollRounds = 3;
-    this.dicesConfig.map(d=>{
-      d.isRolled=false;
-    })
+    this.dicesConfig.map((d) => {
+      d.isRolled = false;
+    });
     this.hide();
   }
 
   hide() {
     setTimeout(() => {
       this.hidden = !this.hidden;
-
     }, 5000);
   }
 
@@ -93,18 +91,18 @@ export class AppComponent {
         this.dicesConfig[1].number.length == this.dicesConfig[0].number.length
       ) {
         this.dicesConfig[2].number = this.dicesConfig[0].number;
-        this.rollRounds=0;
+        this.rollRounds = 0;
         this.rollingText = 'You Won!';
-        this.rolling=true;
+        this.rolling = true;
       }
 
       if (
         this.dicesConfig[2].number.length == this.dicesConfig[0].number.length
       ) {
         this.dicesConfig[1].number = this.dicesConfig[0].number;
-        this.rollRounds=0;
+        this.rollRounds = 0;
         this.rollingText = 'You Won!';
-        this.rolling=true;
+        this.rolling = true;
       }
     }
   }
