@@ -45,18 +45,24 @@ export class AppComponent {
 
   playAgain(): void {
     this.hidden = !this.hidden;
+    this.rolling=false;
     this.rollRounds = 3;
+    this.dicesConfig.map(d=>{
+      d.isRolled=false;
+    })
     this.hide();
   }
 
   hide() {
     setTimeout(() => {
       this.hidden = !this.hidden;
+
     }, 5000);
   }
 
   onRoll(): void {
     this.rollingText = 'Rolling!!';
+    this.rolling = true;
     this.rollRounds--;
     this.interval = setInterval(() => {
       this.dicesConfig.map((dice) => {
@@ -72,25 +78,34 @@ export class AppComponent {
 
   stopRolling(): void {
     clearInterval(this.interval);
+    this.rolling = false;
     if (this.rollRounds == 2) {
       this.dicesConfig[0].isRolled = true;
     }
+    if (this.rollRounds == 1) {
+      this.dicesConfig[1].isRolled = true;
+    }
+    if (this.rollRounds == 0) {
+      this.dicesConfig[2].isRolled = true;
+    }
     if (this.rollRounds == 1 || this.rollRounds == 0) {
-      console.log(this.dicesConfig);
       if (
         this.dicesConfig[1].number.length == this.dicesConfig[0].number.length
       ) {
         this.dicesConfig[2].number = this.dicesConfig[0].number;
-        alert('You Won!');
+        this.rollRounds=0;
+        this.rollingText = 'You Won!';
+        this.rolling=true;
       }
 
       if (
         this.dicesConfig[2].number.length == this.dicesConfig[0].number.length
       ) {
         this.dicesConfig[1].number = this.dicesConfig[0].number;
-        alert('You Won!');
+        this.rollRounds=0;
+        this.rollingText = 'You Won!';
+        this.rolling=true;
       }
     }
-    this.rolling = false;
   }
 }
