@@ -1,0 +1,91 @@
+p {
+  font-family: Lato;
+}
+
+.ludo-game {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  height: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.dice{
+  display: grid;
+	grid-template-areas:
+		"a . c"
+		"e g f"
+		"d . b";
+
+	flex: 0 0 auto;
+}
+
+
+
+.dice-wrapper{
+  display: flex;
+  justify-content: center;
+}
+section{
+  margin-top:80px;
+  margin: 70px 16px 16px 16px;
+	padding: 10px;
+	width: 100px;
+	height: 100px;
+  background-color: #e7e7e7;
+	box-shadow: inset 0 5px white, inset 0 -5px #bbb, inset 5px 0 #d7d7d7,
+		inset -5px 0 #d7d7d7;
+	border-radius: 10%;
+}
+
+.dice-wrapper .dots{
+  width: 24px;
+  display: block;
+	align-self: center;
+	justify-self: center;
+  margin-bottom:10px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: #333;
+	box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+
+.dots:nth-child(2) {
+	grid-area: b;
+}
+.dots:nth-child(3) {
+	grid-area: c;
+}
+.dots:nth-child(4) {
+	grid-area: d;
+}
+.dots:nth-child(5) {
+	grid-area: e;
+}
+.dots:nth-child(6) {
+	grid-area: f;
+}
+.dots:nth-child(odd):last-child {
+	grid-area: g;
+}
+
+.diceRoll{
+  background-color: brown;
+  color:#fff;
+  height:40px;
+  cursor: pointer;
+}
+.diceRoll:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.diceRoll:disabled{
+  background-color: grey;
+  color:#000;
+  box-shadow: none;
+}
+.ludo-game>button{
+  width:200px;
+  margin-top:100px;
+}
