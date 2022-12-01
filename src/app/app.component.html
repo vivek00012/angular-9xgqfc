@@ -1,13 +1,23 @@
 <!-- Ludo game -->
 <main class="ludo-game">
-  <a class="playgain" href="javascript:void(0)" (click)="playAgain()">Play Again</a>
+  <a class="playgain" href="javascript:void(0)" (click)="playAgain()"
+    >Play Again</a
+  >
 
-  <div *ngIf="rollRounds==3 && !hidden" >Your game starts now !</div>
- <div class="dice-wrapper">
-  <section *ngFor="let d of dicesConfig" class="dice">
+  <div *ngIf="rollRounds == 3 && !hidden">Your game starts now !</div>
+  <span class="rolling" *ngIf="rolling">{{ rollingText }}</span>
+  <div class="dice-wrapper">
+    <section *ngFor="let d of dicesConfig" class="dice" (click)="stopRolling()">
       <span *ngFor="let bullet of d.number" class="dots"></span>
-  </section>
- </div>  
+    </section>
+  </div>
 
- <button type='button' class="diceRoll" (click)="onRoll()" [disabled]='!rollRounds'>Roll</button>
+  <button
+    type="button"
+    class="diceRoll"
+    (click)="onRoll()"
+    [disabled]="!rollRounds"
+  >
+    Roll
+  </button>
 </main>

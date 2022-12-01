@@ -15,6 +15,10 @@ export class AppComponent {
   randomNumber = () => Math.floor(Math.random() * 6) + 1;
   public rollRounds: number = 3;
   public hidden = false;
+  rolling: boolean = false;
+  public interval;
+  rollingText = 'Rolling !!';
+
   dicesConfig: Idice[] = [
     {
       isRolled: false,
@@ -34,10 +38,10 @@ export class AppComponent {
     this.hide();
   }
 
-  // gives the dice to roll 1-10 time
-  get noOfRolls() {
-    return Math.floor(Math.random() * 10) + 1;
-  }
+  // gives the dice to roll 4-10 time
+  // get noOfRolls() {
+  //   return Math.floor(Math.random() * (10 - 4)) + 4;
+  // }
 
   playAgain(): void {
     this.hidden = !this.hidden;
@@ -52,18 +56,41 @@ export class AppComponent {
   }
 
   onRoll(): void {
+    this.rollingText = 'Rolling!!';
     this.rollRounds--;
-    let interval;
-    let count = this.noOfRolls;
-    this.dicesConfig.map((dice) => {
-      interval = setInterval(() => {
-        count--;
-        dice.number = new Array(this.randomNumber()).fill(``);
-      }, 1000);
-    });
-
+    this.interval = setInterval(() => {
+      this.dicesConfig.map((dice) => {
+        if (!dice.isRolled) {
+          dice.number = new Array(this.randomNumber()).fill(``);
+          this.rolling = true;
+          this.rollingText = `You Have ${this.rollRounds} round(s) Left!!`;
+        }
+      });
+    }, 1000);
     this.hide();
+  }
 
-    //alert(`You have ${this.rollRounds} rounds left`);
+  stopRolling(): void {
+    clearInterval(this.interval);
+    if (this.rollRounds == 2) {
+      this.dicesConfig[0].isRolled = true;
+    }
+    if (this.rollRounds == 1 || this.rollRounds == 0) {
+      console.log(this.dicesConfig);
+      if (
+        this.dicesConfig[1].number.length == this.dicesConfig[0].number.length
+      ) {
+        this.dicesConfig[2].number = this.dicesConfig[0].number;
+        alert('You Won!');
+      }
+
+      if (
+        this.dicesConfig[2].number.length == this.dicesConfig[0].number.length
+      ) {
+        this.dicesConfig[1].number = this.dicesConfig[0].number;
+        alert('You Won!');
+      }
+    }
+    this.rolling = false;
   }
 }
