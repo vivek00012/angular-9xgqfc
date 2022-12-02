@@ -37,10 +37,6 @@ export class AppComponent {
     this.hide();
   }
 
-  // gives the dice to roll 4-10 time
-  // get noOfRolls() {
-  //   return Math.floor(Math.random() * (10 - 4)) + 4;
-  // }
 
   playAgain(): void {
     this.hidden = !this.hidden;
