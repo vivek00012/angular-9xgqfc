@@ -120,7 +120,7 @@ describe("stopRolling method test cases",async()=>{
     expect(component.dicesConfig[2].isRolled).toBeFalse();
   }));
 
-  it('should roll dice 2nd and 3rd dices only and fix these 2 dices', fakeAsync(() => {
+  it('should fix dice 1st and 2nd only', fakeAsync(() => {
     //ACT
     component.rollRounds = 1;//remaining
     component.dicesConfig[0].isRolled = true;
@@ -137,7 +137,7 @@ describe("stopRolling method test cases",async()=>{
     expect(component.dicesConfig[2].isRolled).toBeFalse();
   }));
 
-  it('should roll dice 3rd only and fix it', fakeAsync(() => {
+  it('should fix all devices only', fakeAsync(() => {
     //ACT
     component.rollRounds = 1;
     component.dicesConfig[0].isRolled=true;
